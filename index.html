@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body{
+            background-color: grey;
+        }
+       
+       #data{
+            text-align: center;
+            margin: auto;
+            width: 40%;
+           
+           
+        }
+        *{
+            text-align: center;
+        }
+    </style>
+   
+</head>
+<body>
+    <input type="text" id="movie" placeholder="Enter movie name" autocomplete="off">
+    <button onclick="omdb()">search</button>
+    <div id="data"></div>
+    
+</body>
+
+<script>
+
+async function omdb(){
+    var movie=document.getElementById("movie").value;
+let res=await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e482f591&t=${movie}`);
+let data=await res.json();
+display(data);
+}
+function display(item){
+        
+        let data=document.getElementById("data");
+        data.innerHTML=null;
+        let div=document.createElement("div");
+        let img=document.createElement("img");
+        img.src=item.Poster;
+        let name=document.createElement("h2");
+        name.textContent=`Title: ${item.Title}`;
+        let rating=document.createElement("p");
+        rating.textContent=`Ratings: ${item.Ratings[0].Value}`;
+        let p=document.createElement("p");
+        p.textContent=`Language: ${item.Language}`;
+        
+
+        div.append(name,img,p,rating,);
+
+        data.append(div);
+    }
+</script>
+</html>
