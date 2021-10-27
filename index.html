@@ -36,6 +36,7 @@ async function omdb(){
     var movie=document.getElementById("movie").value;
 let res=await fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=e482f591&t=${movie}`);
 let data=await res.json();
+    console.log(data);
 display(data);
 }
 function display(item){
